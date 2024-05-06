@@ -45,11 +45,34 @@ Step 6: Open in RTL viewers to get RTL diagram output.
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+```
+module SRFLIPFLOPUSINGCASE(q, q_bar, s,r, clk, reset);//SR Flip Flop Behavioral Level using ‘case’ 
+  input s,r,clk, reset;
+  output reg q;
+  output q_bar;
+ 
+  always@(posedge clk) begin // for synchronous reset
+    if(!reset)       q <= 0;
+    else 
+  begin
+      case({s,r})       
+	     2'b00: q <= q;    // No change
+        2'b01: q <= 1'b0; // Write logic for reset
+        2'b10: q <= 1'b1; // Write logic for set
+        2'b11: q <= 1'bx; // Write logic for Invalid state
+      endcase
+    end
+  end
+  assign q_bar = ~q;
+endmodule
+
+```
 
 **RTL LOGIC FOR FLIPFLOPS**
+![image](https://github.com/Vigneshv-23/SR-FLIPFLOP-USING-CASE/assets/110780412/814d567a-a2f9-44b3-bc9d-30ab50950e12)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![image](https://github.com/Vigneshv-23/SR-FLIPFLOP-USING-CASE/assets/110780412/3aecd99e-7f38-49e5-979d-3de9bc051aca)
 
 **RESULTS**
+Thus the program to implement a SR flipflop using verilog and validating their functionality using their functional tables is successfully completed.
